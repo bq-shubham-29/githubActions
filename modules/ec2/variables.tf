@@ -13,3 +13,7 @@ variable "subnet_id" {
 variable "public_ip" {
    type = bool
 }
+
+variable "vpc_id" {
+   type=string
+}
