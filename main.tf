@@ -6,9 +6,13 @@ module "vpc" {
   #  }
 
   name_tag = "my-vpc1"
-  cidr = "10.0.0.0/16"
+  cidr = "10.0.0.0/24"
   AZ_pub = "ap-northeast-1c"
   AZ_pvt = "ap-northeast-1a"
+  pub_cidrsubnet_newbits = 4
+  pub_cidrsubnet_netnum = 0
+  pvt_cidrsubnet_newbits = 4
+  pvt_cidrsubnet_netnum = 1
 }
 
 module "EC2_pub" {
@@ -32,9 +36,15 @@ module "vpc2" {
    }
 
   name_tag = "my-vpc1"
-  cidr = "10.0.0.0/16"
+  cidr = "192.168.0.0/16"
   AZ_pub = "ap-south-1b"
   AZ_pvt = "ap-south-1a"
+
+  pub_cidrsubnet_newbits = 8
+  pub_cidrsubnet_netnum = 0
+  pvt_cidrsubnet_newbits = 8
+  pvt_cidrsubnet_netnum = 1
+
 }
 
 module "EC2_pub2" {
@@ -51,6 +61,25 @@ module "EC2_pub2" {
   vpc_id= module.vpc2.vpc_id
 }
 
-output "name" {
-   value=module.vpc2.vpc_id
+
+resource "aws_vpc_peering_connection" "vpc_peering" {
+  peer_owner_id = module.vpc.vpc_owner_id
+  peer_vpc_id   = module.vpc2.vpc_id
+  vpc_id        = module.vpc.vpc_id
+  peer_region   = "ap-south-1"
+  auto_accept   = false
+
+  # accepter {
+  #   allow_remote_vpc_dns_resolution = true
+  # }
+
+  # requester {
+  #   allow_remote_vpc_dns_resolution = true
+  # }
+}
+
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  provider                  = aws.mumbai
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
+  auto_accept               = true
 }

@@ -9,3 +9,7 @@ output "private_subnet_id" {
 output "vpc_id" {
   value=aws_vpc.vpc.id
 }
+
+output "vpc_owner_id" {
+  value=aws_vpc.vpc.owner_id
+}

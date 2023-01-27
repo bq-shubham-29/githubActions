@@ -15,3 +15,19 @@ variable "AZ_pub" {
 variable "AZ_pvt" {
     type=string
 }
+
+variable "pub_cidrsubnet_newbits" {
+    type=number
+}
+
+variable "pub_cidrsubnet_netnum" {
+    type=number
+}
+
+variable "pvt_cidrsubnet_newbits" {
+    type=number
+}
+
+variable "pvt_cidrsubnet_netnum" {
+    type=number
+}
