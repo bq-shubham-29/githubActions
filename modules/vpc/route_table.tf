@@ -6,6 +6,11 @@ resource "aws_route_table" "route_public" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
+  route {
+    cidr_block = var.route_cidr
+    gateway_id = var.route_gateway_id
+  }
+
   
 
   tags = {

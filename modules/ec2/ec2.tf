@@ -4,6 +4,8 @@ resource "aws_instance" "EC2" {
      subnet_id = var.subnet_id
      associate_public_ip_address = var.public_ip
      security_groups = ["${aws_security_group.security_group.id}"]
+     key_name = aws_key_pair.my_key.key_name
+
      user_data = <<EOF
      #! /bin/bash
      sudo apt-get update

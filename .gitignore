@@ -4,5 +4,4 @@
 *.tfstate.*
 
 *.log
-
-*.tfvars
+*id_rsa*

@@ -1,0 +1,5 @@
+resource "aws_key_pair" "my_key" {
+key_name   = "aws_key"
+public_key ="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEha0IYd01w5JecuBS4D4iILfDxkopHboYuEH2/ugvJsN65ypveK8Or5nDHqAizli/b4azL3gov41EJB86BFYoAihq318I1gPRMO/E1R+rn7oS1rzZJXLXVDTFon0iE7Y64I2ex30ChK+tOfHkEQ1QjPhB1lZnnFprsZGwqHEbPoJdmztBAQQl9Sug+sYc0qa9NCK08pilAvrmS0GeNmfViNudd9sxZ8fnvhi5NJeu4NVr6WgVEyoqCehxPj6yvFT8qqAyKGHXpnsUXLv5fCSFH5DB56BbCUfUUfy6shVTKOcRVv5Zx6qpdO23zEQqhInNxR/6HrzsJqRsKNLHKEz3 ubuntu@ubuntu-IdeaPad-3-15ITL6"
+#file("${module.path}/home/ubuntu/terraform_assign/Training/id_rsa.pub")
+}

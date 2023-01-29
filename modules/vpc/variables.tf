@@ -31,3 +31,11 @@ variable "pvt_cidrsubnet_newbits" {
 variable "pvt_cidrsubnet_netnum" {
     type=number
 }
+
+variable "route_cidr" {
+    type=string
+}
+
+variable "route_gateway_id" {
+    type=string
+}

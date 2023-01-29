@@ -13,3 +13,7 @@ output "vpc_id" {
 output "vpc_owner_id" {
   value=aws_vpc.vpc.owner_id
 }
+
+output "vpc_cidr" {
+  value=aws_vpc.vpc.cidr_block
+}
