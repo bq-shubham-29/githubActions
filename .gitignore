@@ -1,7 +1,6 @@
-*.terraform
-
+**/.terraform/*
 *.tfstate
-*.tfstate.*
-
+*.tfstate.backup
 *.log
-*id_rsa*
+*id_rsa
+*id_rsa.pub
