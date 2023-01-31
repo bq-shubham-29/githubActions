@@ -1,15 +1,15 @@
-resource "aws_internet_gateway" "igw1" {
-  vpc_id = aws_vpc.vpc1.id
-
+resource "aws_internet_gateway" "internetGatewayRequesterVpc" {
+  vpc_id   = aws_vpc.requesterVpc.id
+  provider = aws.Tokyo
   tags = {
-    Name = "igw_${aws_vpc.vpc1.id}"
+    Name = "internetGateway"
   }
 }
 
-resource "aws_internet_gateway" "igw2" {
-  vpc_id = aws_vpc.vpc2.id
+resource "aws_internet_gateway" "internetGatewayAccepterVpc" {
+  vpc_id   = aws_vpc.AccepterVpc.id
   provider = aws.Mumbai
   tags = {
-    Name = "igw_${aws_vpc.vpc2.id}"
+    Name = "internetGateway"
   }
 }

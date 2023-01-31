@@ -1,42 +1,37 @@
-resource "aws_subnet" "public_subnet1" {
-  vpc_id     = aws_vpc.vpc1.id
-  cidr_block = cidrsubnet(var.cidr1,var.public_cidrsubnet_newbits1,var.public_cidrsubnet_netnum1)
-  availability_zone = var.az_public1
-
+resource "aws_subnet" "publicSubnetRequesterVpc" {
+  vpc_id            = aws_vpc.requesterVpc.id
+  cidr_block        = var.publicSubnetCidrRequesterVpc
+  availability_zone = var.publicAzRequesterVpc
+  provider = aws.Tokyo
   tags = {
-    Name = "public_subnet"
+    Name = "publicSubnet"
+  }
+}
+resource "aws_subnet" "privateSubnetRequesterVpc" {
+  vpc_id            = aws_vpc.requesterVpc.id
+  cidr_block        = var.privateSubnetCidrRequesterVpc
+  availability_zone = var.privateAzRequesterVpc
+  provider = aws.Tokyo
+  tags = {
+    Name = "privateSubnet"
   }
 }
 
-resource "aws_subnet" "private_subnet1" {
-  vpc_id     = aws_vpc.vpc1.id
-  cidr_block = cidrsubnet(var.cidr1,var.private_cidrsubnet_newbits1,var.private_cidrsubnet_netnum1)
-  availability_zone = var.az_private1
-
+resource "aws_subnet" "publicSubnetAccepterVpc" {
+  vpc_id            = aws_vpc.AccepterVpc.id
+  cidr_block        = var.publicSubnetCidrAccepterVpc
+  availability_zone = var.publicAzAccepterVpc
+  provider          = aws.Mumbai
   tags = {
-    Name = "private_subnet"
+    Name = "publicSubnet"
   }
 }
-
-resource "aws_subnet" "public_subnet2" {
-  vpc_id     = aws_vpc.vpc2.id
-  cidr_block = cidrsubnet(var.cidr2,var.public_cidrsubnet_newbits2,var.public_cidrsubnet_netnum2)
-  availability_zone = var.az_public2
-  provider = aws.Mumbai
-
+resource "aws_subnet" "privateSubnetAccepterVpc" {
+  vpc_id            = aws_vpc.AccepterVpc.id
+  cidr_block        = var.privateSubnetCidrAccepterVpc
+  availability_zone = var.privateAzAccepterVpc
+  provider          = aws.Mumbai
   tags = {
-    Name = "public_subnet"
+    Name = "privateSubnet"
   }
 }
-
-resource "aws_subnet" "private_subnet2" {
-  vpc_id     = aws_vpc.vpc2.id
-  cidr_block = cidrsubnet(var.cidr2,var.private_cidrsubnet_newbits2,var.private_cidrsubnet_netnum2)
-  availability_zone = var.az_private2
-  provider = aws.Mumbai
-
-  tags = {
-    Name = "private_subnet"
-  }
-}
-

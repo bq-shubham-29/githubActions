@@ -1,89 +1,48 @@
-variable "instance_type1" {
+variable "instanceTypeRequester" {
   type = string
 }
 
-variable "instance_type2" {
+variable "instanceTypeAccepter" {
   type = string
 }
 
-variable "cidr_ap-northeast-1" {
-  type    = string
-  default = "10.0.0.0/24"
+variable "cidrBlockRequesterVpc" {
+  type = string
 }
 
-variable "AZ-pub_ap-northeast-1" {
-  type    = string
-  default = "ap-northeast-1c"
+variable "publicAzRequesterVpc" {
+  type = string
 }
 
-variable "AZ-pvt_ap-northeast-1" {
-  type    = string
-  default = "ap-northeast-1a"
+variable "privateAzRequesterVpc" {
+  type = string
 }
 
 
-variable "cidr_ap-south-1" {
-  type    = string
-  default = "192.168.0.0/16"
+variable "cidrBlockAccepterVpc" {
+  type = string
 }
 
-variable "AZ-pub_ap-south-1" {
-  type    = string
-  default = "ap-south-1b"
+variable "publicAzAccepterVpc" {
+  type = string
 }
 
-variable "AZ-pvt_ap-south-1" {
-  type    = string
-  default = "ap-south-1a"
+variable "privateAzAccepterVpc" {
+  type = string
 }
 
-variable "image_id1" {
-  type    = string
-  default = "ami-0cd7ad8676931d727"
+variable "publicSubnetCidrRequesterVpc" {
+  type = string
 }
 
-variable "image_id2" {
-  type    = string
-  default = "ami-06984ea821ac0a879"
+variable "privateSubnetCidrRequesterVpc" {
+  type = string
 }
 
-variable "public_newbits1" {
-  type = number
-  default=4
+variable "publicSubnetCidrAccepterVpc" {
+  type = string
 }
 
-variable "public_netnum1" {
-  type = number
-  default=0
+variable "privateSubnetCidrAccepterVpc" {
+  type = string
 }
-
-variable "private_newbits1" {
-  type = number
-  default=4
-}
-
-variable "private_netnum1" {
-  type = number
-  default=1
-}
-
-variable "public_newbits2" {
-  type = number
-  default=8
-}
-
-variable "public_netnum2" {
-  type = number
-  default=0
-}
-
-variable "private_newbits2" {
-  type = number
-  default=8
-}
-
-variable "private_netnum2" {
-  type = number
-  default=1
-}
-

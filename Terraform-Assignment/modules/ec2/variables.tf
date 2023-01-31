@@ -1,40 +1,32 @@
-variable "ami1" {
-   type = string
+variable "instanceTypeRequester" {
+  type = string
 }
 
-variable "instance_type1" {
-   type = string
+variable "publicSubnetIdRequesterVpc" {
+  type = string
 }
 
-variable "subnet_id1" {
-   type = string
+variable "isAllocatePublicIpRequesterVpc" {
+  type = bool
 }
 
-variable "public_ip1" {
-   type = bool
-}
-
-variable "vpc_id1" {
-   type=string
+variable "idRequesterVpc" {
+  type = string
 }
 
 
-variable "ami2" {
-   type = string
+variable "instanceTypeAccepter" {
+  type = string
 }
 
-variable "instance_type2" {
-   type = string
+variable "publicSubnetIdAccepterVpc" {
+  type = string
 }
 
-variable "subnet_id2" {
-   type = string
+variable "isAllocatePublicIpAccepterVpc" {
+  type = bool
 }
 
-variable "public_ip2" {
-   type = bool
-}
-
-variable "vpc_id2" {
-   type=string
+variable "idAccepterVpc" {
+  type = string
 }

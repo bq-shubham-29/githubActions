@@ -1,69 +1,47 @@
-variable "name_tag1" {
-     type = string
+variable "nameRequesterVpc" {
+  type = string
 }
 
-variable "name_tag2" {
-     type = string
+variable "nameAccepterVpc" {
+  type = string
 }
 
-variable "cidr1" {
-    type =string
+variable "cidrBlockRequesterVpc" {
+  type = string
 }
 
-variable "cidr2" {
-    type =string
+variable "cidrBlockAccepterVpc" {
+  type = string
 }
 
-
-variable "az_public1" {
-    type=string
+variable "publicAzRequesterVpc" {
+  type = string
 }
 
-variable "az_private1" {
-    type=string
+variable "privateAzRequesterVpc" {
+  type = string
 }
 
-variable "az_public2" {
-    type=string
+variable "publicAzAccepterVpc" {
+  type = string
 }
 
-variable "az_private2" {
-    type=string
+variable "privateAzAccepterVpc" {
+  type = string
 }
 
-variable "public_cidrsubnet_newbits1" {
-    type=number
+variable "publicSubnetCidrRequesterVpc" {
+  type = string
 }
 
-variable "public_cidrsubnet_netnum1" {
-    type=number
+variable "privateSubnetCidrRequesterVpc" {
+  type = string
 }
 
-variable "private_cidrsubnet_newbits1" {
-    type=number
+variable "publicSubnetCidrAccepterVpc" {
+  type = string
 }
 
-variable "private_cidrsubnet_netnum1" {
-    type=number
+variable "privateSubnetCidrAccepterVpc" {
+  type = string
 }
-
-
-variable "public_cidrsubnet_newbits2" {
-    type=number
-}
-
-variable "public_cidrsubnet_netnum2" {
-    type=number
-}
-
-variable "private_cidrsubnet_newbits2" {
-    type=number
-}
-
-variable "private_cidrsubnet_netnum2" {
-    type=number
-}
-
-
-
-

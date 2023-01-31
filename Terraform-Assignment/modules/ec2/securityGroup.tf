@@ -1,68 +1,65 @@
-resource "aws_security_group" "security_group1" {
-     name        = "sg"
-     vpc_id      = var.vpc_id1
+resource "aws_security_group" "securityGroupRequesterVpc" {
+  name     = "securityGroup"
+  vpc_id   = var.idRequesterVpc
+  provider = aws.Tokyo
 
-  ingress{
-            from_port        = 22
-            to_port          = 22
-            protocol         = "tcp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
-  ingress{
-            from_port        = 80
-            to_port          = 80
-            protocol         = "tcp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
-  ingress{
-            from_port        = -1
-            to_port          = -1
-            protocol         = "icmp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
+  dynamic "ingress" {
+    for_each = [22, 80]
+    iterator = port
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
-            from_port        = 0
-            to_port          = 0
-            protocol         = "-1"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
 }
 
 
 
-resource "aws_security_group" "security_group2" {
-     name        = "sg"
-     vpc_id      = var.vpc_id2
-     provider = aws.Mumbai
-    
+resource "aws_security_group" "securityGroupAccepterVpc" {
+  name     = "sg"
+  vpc_id   = var.idAccepterVpc
+  provider = aws.Mumbai
 
-  ingress{
-            from_port        = 22
-            to_port          = 22
-            protocol         = "tcp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
-  ingress{
-            from_port        = -1
-            to_port          = -1
-            protocol         = "icmp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
-  ingress{
-            from_port        = 80
-            to_port          = 80
-            protocol         = "tcp"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }  
-        
+  dynamic "ingress" {
+    for_each = [22, 80]
+    iterator = port
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
   egress {
-            from_port        = 0
-            to_port          = 0
-            protocol         = "-1"
-            cidr_blocks      = ["0.0.0.0/0"]
-        }
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
 }
 

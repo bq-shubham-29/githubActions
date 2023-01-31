@@ -1,15 +1,27 @@
-resource "aws_vpc" "vpc1" {
-  cidr_block       = var.cidr1
+# resource "aws_vpc" "AccepterVpc" {
+#   for_each = toset(["${var.cidrBlockRequesterVpc}","Mumbai"],["${var.cidrBlockAccepterVpc}","Tokyo"])
+#   iterator = port
+#   contener{
+#       provider   = aws.Mumbai
+#       cidr_block = port.value
+#       tags = {
+#       Name = var.nameAccepterVpc
+#       }
+#    }
+# }
+
+
+resource "aws_vpc" "requesterVpc" {
+  cidr_block = var.cidrBlockRequesterVpc
+  provider = aws.Tokyo
   tags = {
-    Name = var.name_tag1
+    Name = var.nameRequesterVpc
   }
 }
-
-resource "aws_vpc" "vpc2" {
-  cidr_block       = var.cidr2
-  provider = aws.Mumbai
+resource "aws_vpc" "AccepterVpc" {
+  cidr_block = var.cidrBlockAccepterVpc
+  provider   = aws.Mumbai
   tags = {
-    Name = var.name_tag2
+    Name = var.nameAccepterVpc
   }
 }
-

@@ -1,23 +1,15 @@
-output "public_subnet_id1" {
-  value=aws_subnet.public_subnet1.id
+output "publicSubnetIdRequesterVpc" {
+  value = aws_subnet.publicSubnetRequesterVpc.id
 }
 
-output "private_subnet_id1" {
-  value=aws_subnet.private_subnet1.id
+output "publicSubnetIdAccepterVpc" {
+  value = aws_subnet.publicSubnetAccepterVpc.id
 }
 
-output "public_subnet_id2" {
-  value=aws_subnet.public_subnet2.id
+output "idRequesterVpc" {
+  value = aws_vpc.requesterVpc.id
 }
 
-output "private_subnet_id2" {
-  value=aws_subnet.private_subnet2.id
-}
-
-output "vpc_id1" {
-  value = aws_vpc.vpc1.id
-}
-
-output "vpc_id2" {
-  value = aws_vpc.vpc2.id
+output "idAccepterVpc" {
+  value = aws_vpc.AccepterVpc.id
 }
