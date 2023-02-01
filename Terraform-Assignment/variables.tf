@@ -46,3 +46,7 @@ variable "publicSubnetCidrAccepterVpc" {
 variable "privateSubnetCidrAccepterVpc" {
   type = string
 }
+
+variable "peerRegion" {
+  type = string
+}

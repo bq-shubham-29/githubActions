@@ -1,32 +1,15 @@
-variable "instanceTypeRequester" {
+variable "instanceType" {
   type = string
 }
 
-variable "publicSubnetIdRequesterVpc" {
+variable "publicSubnetId" {
   type = string
 }
 
-variable "isAllocatePublicIpRequesterVpc" {
+variable "isAllocatePublicIp" {
   type = bool
 }
 
-variable "idRequesterVpc" {
-  type = string
-}
-
-
-variable "instanceTypeAccepter" {
-  type = string
-}
-
-variable "publicSubnetIdAccepterVpc" {
-  type = string
-}
-
-variable "isAllocatePublicIpAccepterVpc" {
-  type = bool
-}
-
-variable "idAccepterVpc" {
+variable "vpcId" {
   type = string
 }

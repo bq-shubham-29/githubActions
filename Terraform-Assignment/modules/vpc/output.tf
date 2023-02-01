@@ -1,15 +1,11 @@
-output "publicSubnetIdRequesterVpc" {
-  value = aws_subnet.publicSubnetRequesterVpc.id
+output "publicSubnetId" {
+  value = aws_subnet.publicSubnet.id
 }
 
-output "publicSubnetIdAccepterVpc" {
-  value = aws_subnet.publicSubnetAccepterVpc.id
+output "vpcId" {
+  value = aws_vpc.vpc.id
 }
 
-output "idRequesterVpc" {
-  value = aws_vpc.requesterVpc.id
-}
-
-output "idAccepterVpc" {
-  value = aws_vpc.AccepterVpc.id
+output "peer_owner_id" {
+  value = aws_vpc.vpc.owner_id
 }

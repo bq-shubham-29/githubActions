@@ -1,47 +1,31 @@
-variable "nameRequesterVpc" {
+variable "name" {
   type = string
 }
 
-variable "nameAccepterVpc" {
+variable "cidrBlock" {
   type = string
 }
 
-variable "cidrBlockRequesterVpc" {
+variable "publicAz" {
   type = string
 }
 
-variable "cidrBlockAccepterVpc" {
+variable "privateAz" {
   type = string
 }
 
-variable "publicAzRequesterVpc" {
+variable "publicSubnetCidr" {
   type = string
 }
 
-variable "privateAzRequesterVpc" {
+variable "privateSubnetCidr" {
   type = string
 }
 
-variable "publicAzAccepterVpc" {
+variable "peeringId" {
   type = string
 }
 
-variable "privateAzAccepterVpc" {
-  type = string
-}
-
-variable "publicSubnetCidrRequesterVpc" {
-  type = string
-}
-
-variable "privateSubnetCidrRequesterVpc" {
-  type = string
-}
-
-variable "publicSubnetCidrAccepterVpc" {
-  type = string
-}
-
-variable "privateSubnetCidrAccepterVpc" {
+variable "cidrBlockAnotherVpc" {
   type = string
 }
