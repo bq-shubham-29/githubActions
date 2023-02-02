@@ -6,26 +6,26 @@ variable "cidrBlock" {
   type = string
 }
 
-variable "publicAz" {
-  type = string
-}
-
-variable "privateAz" {
-  type = string
-}
-
 variable "publicSubnetCidr" {
-  type = string
+  type = list(any)
 }
 
 variable "privateSubnetCidr" {
+  type = list(any)
+}
+
+variable "peeringCidrBlock" {
   type = string
 }
 
-variable "peeringId" {
+variable "quadZeroRoute" {
   type = string
 }
 
-variable "cidrBlockAnotherVpc" {
+variable "peeringConnectionId" {
+  type = string
+}
+
+variable "region" {
   type = string
 }

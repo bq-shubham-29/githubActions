@@ -1,11 +1,13 @@
 provider "aws" {
   profile = "aws_credential"
 }
+
 provider "aws" {
-  alias  = "Tokyo"
-  region = "ap-northeast-1"
+  alias  = "requester"
+  region = var.requesterRegion
 }
+
 provider "aws" {
-  alias  = "Mumbai"
-  region = "ap-south-1"
+  alias  = "accepter"
+  region = var.accepterRegion
 }

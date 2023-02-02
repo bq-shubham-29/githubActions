@@ -1,61 +1,75 @@
+#call vpc module for requester vpc with parameters
 module "requesterVpc" {
-  source = "./modules/vpc"
-  name   = "requesterVpc"
   providers = {
-    aws = aws.Tokyo
+    aws = aws.requester
   }
+  source              = "./modules/vpc"
+  name                = "requesterVpc"
   cidrBlock           = var.cidrBlockRequesterVpc
-  publicAz            = var.publicAzRequesterVpc
-  privateAz           = var.privateAzRequesterVpc
-  publicSubnetCidr    = var.publicSubnetCidrRequesterVpc
-  privateSubnetCidr   = var.privateSubnetCidrRequesterVpc
-  peeringId           = aws_vpc_peering_connection.peeringRequesterVpc.id
-  cidrBlockAnotherVpc = var.cidrBlockAccepterVpc
+  publicSubnetCidr    = var.publicSubnetListRequester
+  privateSubnetCidr   = var.privateSubnetListRequester
+  peeringCidrBlock    = var.cidrBlockAccepterVpc
+  quadZeroRoute       = var.quadZeroRoute
+  peeringConnectionId = module.vpcPeering.peeringConnectionId
+  region              = var.requesterRegion
 }
+
+#call vpc module for accepter vpc with parameters
 module "accepterVpc" {
-  source = "./modules/vpc"
-  name   = "accepterVpc"
   providers = {
-    aws = aws.Mumbai
+    aws = aws.accepter
   }
+  source              = "./modules/vpc"
+  name                = "accepterVpc"
   cidrBlock           = var.cidrBlockAccepterVpc
-  publicAz            = var.publicAzAccepterVpc
-  privateAz           = var.privateAzAccepterVpc
-  publicSubnetCidr    = var.publicSubnetCidrAccepterVpc
-  privateSubnetCidr   = var.privateSubnetCidrAccepterVpc
-  peeringId           = aws_vpc_peering_connection.peeringRequesterVpc.id
-  cidrBlockAnotherVpc = var.cidrBlockRequesterVpc
+  publicSubnetCidr    = var.publicSubnetListAccepter
+  privateSubnetCidr   = var.privateSubnetListAccepter
+  peeringCidrBlock    = var.cidrBlockRequesterVpc
+  quadZeroRoute       = var.quadZeroRoute
+  peeringConnectionId = module.vpcPeering.peeringConnectionId
+  region              = var.accepterRegion
 }
-module "ec2RequesterVpc" {
+
+#call ec2 module for requester vpc with parameters
+module "ec2Requester" {
   providers = {
-    aws = aws.Tokyo
+    aws = aws.requester
   }
   source             = "./modules/ec2"
   instanceType       = var.instanceTypeRequester
-  publicSubnetId     = module.requesterVpc.publicSubnetId
+  count              = length(module.requesterVpc.publicSubnetId)
+  publicSubnetId     = module.requesterVpc.publicSubnetId[count.index]
   isAllocatePublicIp = true
   vpcId              = module.requesterVpc.vpcId
+  countValue         = count.index
+  securityGroupId    = module.requesterVpc.securityGroupId
+  region             = var.requesterRegion
 }
-module "ec2AccepterVpc" {
+
+#call ec2 module for accepter vpc with parameters
+module "ec2Accepter" {
   providers = {
-    aws = aws.Mumbai
+    aws = aws.accepter
   }
   source             = "./modules/ec2"
   instanceType       = var.instanceTypeAccepter
-  publicSubnetId     = module.accepterVpc.publicSubnetId
+  count              = length(module.accepterVpc.publicSubnetId)
+  publicSubnetId     = module.accepterVpc.publicSubnetId[count.index]
   isAllocatePublicIp = true
   vpcId              = module.accepterVpc.vpcId
+  countValue         = count.index
+  securityGroupId    = module.accepterVpc.securityGroupId
+  region             = var.accepterRegion
 }
-resource "aws_vpc_peering_connection" "peeringRequesterVpc" {
-  provider      = aws.Tokyo
-  peer_owner_id = module.requesterVpc.peer_owner_id
-  peer_vpc_id   = module.accepterVpc.vpcId
-  vpc_id        = module.requesterVpc.vpcId
-  peer_region   = var.peerRegion
-  auto_accept   = false
-}
-resource "aws_vpc_peering_connection_accepter" "peeringAccepterVpc" {
-  provider                  = aws.Mumbai
-  vpc_peering_connection_id = aws_vpc_peering_connection.peeringRequesterVpc.id
-  auto_accept               = true
+
+module "vpcPeering" {
+  providers = {
+    aws.requester = aws.requester
+    aws.accepter  = aws.accepter
+  }
+  source      = "./modules/vpcPeering"
+  peerOwnerId = module.requesterVpc.peerOwnerId
+  peerVpcId   = module.accepterVpc.vpcId
+  vpcId       = module.requesterVpc.vpcId
+  peerRegion  = var.peerRegion
 }

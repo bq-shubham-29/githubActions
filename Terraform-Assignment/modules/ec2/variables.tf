@@ -13,3 +13,16 @@ variable "isAllocatePublicIp" {
 variable "vpcId" {
   type = string
 }
+
+#this is for dynamically change the name
+variable "countValue" {
+  type = number
+}
+
+variable "securityGroupId" {
+  type = string
+}
+
+variable "region" {
+  type = string
+}

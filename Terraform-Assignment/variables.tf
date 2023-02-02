@@ -10,43 +10,38 @@ variable "cidrBlockRequesterVpc" {
   type = string
 }
 
-variable "publicAzRequesterVpc" {
-  type = string
-}
-
-variable "privateAzRequesterVpc" {
-  type = string
-}
-
-
 variable "cidrBlockAccepterVpc" {
   type = string
 }
 
-variable "publicAzAccepterVpc" {
-  type = string
-}
-
-variable "privateAzAccepterVpc" {
-  type = string
-}
-
-variable "publicSubnetCidrRequesterVpc" {
-  type = string
-}
-
-variable "privateSubnetCidrRequesterVpc" {
-  type = string
-}
-
-variable "publicSubnetCidrAccepterVpc" {
-  type = string
-}
-
-variable "privateSubnetCidrAccepterVpc" {
-  type = string
-}
-
 variable "peerRegion" {
+  type = string
+}
+
+variable "quadZeroRoute" {
+  type = string
+}
+
+variable "publicSubnetListRequester" {
+  type = list(any)
+}
+
+variable "privateSubnetListRequester" {
+  type = list(any)
+}
+
+variable "publicSubnetListAccepter" {
+  type = list(any)
+}
+
+variable "privateSubnetListAccepter" {
+  type = list(any)
+}
+
+variable "requesterRegion" {
+  type = string
+}
+
+variable "accepterRegion" {
   type = string
 }

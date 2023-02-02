@@ -1,16 +1,25 @@
-resource "aws_subnet" "publicSubnet" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.publicSubnetCidr
-  availability_zone = var.publicAz
-  tags = {
-    Name = "publicSubnet"
-  }
+data "aws_availability_zones" "available" {
+  state = "available"
 }
-resource "aws_subnet" "privateSubnet" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.privateSubnetCidr
-  availability_zone = var.privateAz
+
+#create public subnet
+resource "aws_subnet" "publicSubnet" {
   tags = {
-    Name = "privateSubnet"
+    Name = "publicSubnet-${count.index}-${var.region}"
   }
+  vpc_id            = aws_vpc.vpc.id
+  availability_zone = data.aws_availability_zones.available.names[0]
+  count             = length(var.publicSubnetCidr)
+  cidr_block        = var.publicSubnetCidr[count.index]
+}
+
+#create private subnet
+resource "aws_subnet" "privateSubnet" {
+  tags = {
+    Name = "privateSubnet-${count.index}-${var.region}"
+  }
+  vpc_id            = aws_vpc.vpc.id
+  availability_zone = data.aws_availability_zones.available.names[1]
+  count             = length(var.privateSubnetCidr)
+  cidr_block        = var.privateSubnetCidr[count.index]
 }
