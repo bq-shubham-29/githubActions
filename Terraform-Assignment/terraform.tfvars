@@ -1,8 +1,6 @@
-instanceTypeRequester      = "t2.micro"
-instanceTypeAccepter       = "t2.micro"
+instanceType               = "t2.micro"
 cidrBlockAccepterVpc       = "192.168.0.0/16"
 cidrBlockRequesterVpc      = "10.0.0.0/24"
-peerRegion                 = "ap-south-1"
 privateSubnetListRequester = ["10.0.0.0/28", "10.0.0.32/28"]
 publicSubnetListRequester  = ["10.0.0.16/28", "10.0.0.48/28"]
 privateSubnetListAccepter  = ["192.168.0.0/28", "192.168.0.32/28"]
@@ -10,3 +8,7 @@ publicSubnetListAccepter   = ["192.168.0.16/28", "192.168.0.48/28"]
 quadZeroRoute              = "0.0.0.0/0"
 requesterRegion            = "ap-northeast-1"
 accepterRegion             = "ap-south-1"
+requesterVpcName           = "requesterVpc"
+accepterVpcName            = "accepterVpc"
+requesterInstanceName      = "requesterEc2"
+accepterInstanceName       = "accepterEc2"

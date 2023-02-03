@@ -1,8 +1,4 @@
-variable "instanceTypeRequester" {
-  type = string
-}
-
-variable "instanceTypeAccepter" {
+variable "instanceType" {
   type = string
 }
 
@@ -11,10 +7,6 @@ variable "cidrBlockRequesterVpc" {
 }
 
 variable "cidrBlockAccepterVpc" {
-  type = string
-}
-
-variable "peerRegion" {
   type = string
 }
 
@@ -43,5 +35,21 @@ variable "requesterRegion" {
 }
 
 variable "accepterRegion" {
+  type = string
+}
+
+variable "requesterVpcName" {
+  type = string
+}
+
+variable "accepterVpcName" {
+  type = string
+}
+
+variable "requesterInstanceName" {
+  type = string
+}
+
+variable "accepterInstanceName" {
   type = string
 }

@@ -12,4 +12,4 @@ resource "aws_instance" "instance" {
     Name = "${var.instanceName}-${count.index}-${var.region}"
   }
 }
-     
+   

@@ -4,7 +4,7 @@ module "requesterVpc" {
     aws = aws.requester
   }
   source              = "./modules/vpc"
-  name                = "requesterVpc"
+  name                = var.requesterVpcName
   cidrBlock           = var.cidrBlockRequesterVpc
   publicSubnetCidr    = var.publicSubnetListRequester
   privateSubnetCidr   = var.privateSubnetListRequester
@@ -20,7 +20,7 @@ module "accepterVpc" {
     aws = aws.accepter
   }
   source              = "./modules/vpc"
-  name                = "accepterVpc"
+  name                = var.accepterVpcName
   cidrBlock           = var.cidrBlockAccepterVpc
   publicSubnetCidr    = var.publicSubnetListAccepter
   privateSubnetCidr   = var.privateSubnetListAccepter
@@ -35,16 +35,14 @@ module "ec2Requester" {
   providers = {
     aws = aws.requester
   }
-  source          = "./modules/ec2"
-  instanceName    = "ec2Requester"
-  instanceType    = var.instanceTypeRequester
-  publicSubnetIds = module.requesterVpc.publicSubnetId
-  #publicSubnetId    = module.requesterVpc.publicSubnetId[count.index]
+  source             = "./modules/ec2"
+  instanceName       = var.requesterInstanceName
+  instanceType       = var.instanceType
+  publicSubnetIds    = module.requesterVpc.publicSubnetId
   isAllocatePublicIp = true
   vpcId              = module.requesterVpc.vpcId
-  #countV         = count.index
-  securityGroupId = module.requesterVpc.securityGroupId
-  region          = var.requesterRegion
+  securityGroupId    = module.requesterVpc.securityGroupId
+  region             = var.requesterRegion
 }
 
 #call ec2 module for accepter vpc with parameters
@@ -52,16 +50,14 @@ module "ec2Accepter" {
   providers = {
     aws = aws.accepter
   }
-  source          = "./modules/ec2"
-  instanceName    = "ec2Accepter"
-  instanceType    = var.instanceTypeAccepter
-  publicSubnetIds = module.accepterVpc.publicSubnetId
-  # publicSubnetId     = module.accepterVpc.publicSubnetId[count.index]
+  source             = "./modules/ec2"
+  instanceName       = var.accepterInstanceName
+  instanceType       = var.instanceType
+  publicSubnetIds    = module.accepterVpc.publicSubnetId
   isAllocatePublicIp = true
   vpcId              = module.accepterVpc.vpcId
-  #countValue         = count.index
-  securityGroupId = module.accepterVpc.securityGroupId
-  region          = var.accepterRegion
+  securityGroupId    = module.accepterVpc.securityGroupId
+  region             = var.accepterRegion
 }
 
 module "vpcPeering" {
@@ -69,9 +65,10 @@ module "vpcPeering" {
     aws.requester = aws.requester
     aws.accepter  = aws.accepter
   }
-  source      = "./modules/vpcPeering"
-  peerOwnerId = module.requesterVpc.peerOwnerId
-  peerVpcId   = module.accepterVpc.vpcId
-  vpcId       = module.requesterVpc.vpcId
-  peerRegion  = var.peerRegion
+  source              = "./modules/vpcPeering"
+  peerOwnerId         = module.requesterVpc.peerOwnerId
+  peerVpcId           = module.accepterVpc.vpcId
+  vpcId               = module.requesterVpc.vpcId
+  peerRegion          = var.accepterRegion
+  isPeeringAutoAccept = true
 }

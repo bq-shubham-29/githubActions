@@ -13,3 +13,7 @@ variable "vpcId" {
 variable "peerRegion" {
   type = string
 }
+
+variable "isPeeringAutoAccept" {
+  type = bool
+}
