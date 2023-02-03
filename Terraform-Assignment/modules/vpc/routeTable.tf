@@ -10,13 +10,14 @@ resource "aws_route_table" "publicRoute" {
     gateway_id = var.peeringConnectionId
   }
   tags = {
-    Name = "publicRouteRequester-${var.region}"
+    Name = "publicRoute-${var.region}"
   }
 }
 
 #associate subnet to public route table
 resource "aws_route_table_association" "associateSubnetpublicRoute" {
-  subnet_id      = aws_subnet.publicSubnet[0].id
+  count          = length(aws_subnet.publicSubnet)
+  subnet_id      = aws_subnet.publicSubnet[count.index].id
   route_table_id = aws_route_table.publicRoute.id
 }
 
@@ -28,12 +29,13 @@ resource "aws_route_table" "privateRoute" {
     gateway_id = aws_nat_gateway.natGateway.id
   }
   tags = {
-    Name = "privateRouteRequester-${var.region}"
+    Name = "privateRoute-${var.region}"
   }
 }
 
 #associate subnet to private route table
 resource "aws_route_table_association" "associateSubnetprivateRoute" {
-  subnet_id      = aws_subnet.privateSubnet[0].id
+  count          = length(aws_subnet.privateSubnet)
+  subnet_id      = aws_subnet.privateSubnet[count.index].id
   route_table_id = aws_route_table.privateRoute.id
 }

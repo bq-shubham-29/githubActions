@@ -2,10 +2,6 @@ variable "instanceType" {
   type = string
 }
 
-variable "publicSubnetId" {
-  type = string
-}
-
 variable "isAllocatePublicIp" {
   type = bool
 }
@@ -15,8 +11,8 @@ variable "vpcId" {
 }
 
 #this is for dynamically change the name
-variable "countValue" {
-  type = number
+variable "publicSubnetIds" {
+  type = list(string)
 }
 
 variable "securityGroupId" {
@@ -24,5 +20,9 @@ variable "securityGroupId" {
 }
 
 variable "region" {
+  type = string
+}
+
+variable "instanceName" {
   type = string
 }
