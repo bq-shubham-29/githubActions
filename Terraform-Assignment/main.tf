@@ -13,6 +13,7 @@ module "requesterVpc" {
   peeringConnectionId = module.vpcPeering.peeringConnectionId
   region              = var.requesterRegion
   mapPublicIpOnLaunch = var.mapPublicIpOnLaunch
+  ingressPorts        = var.ingressPorts 
 }
 
 #call vpc module for accepter vpc with parameters
@@ -30,7 +31,7 @@ module "accepterVpc" {
   peeringConnectionId = module.vpcPeering.peeringConnectionId
   region              = var.accepterRegion
   mapPublicIpOnLaunch = var.mapPublicIpOnLaunch
-
+  ingressPorts        = var.ingressPorts 
 }
 
 #call ec2 module for requester vpc with parameters

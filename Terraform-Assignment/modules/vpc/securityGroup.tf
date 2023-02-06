@@ -3,7 +3,7 @@ resource "aws_security_group" "securityGroup" {
   name   = "securityGroup"
   vpc_id = aws_vpc.vpc.id
   dynamic "ingress" {
-    for_each = [22, 80]
+    for_each = var.ingressPorts
     iterator = port
     content {
       from_port   = port.value

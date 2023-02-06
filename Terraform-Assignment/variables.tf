@@ -55,9 +55,16 @@ variable "accepterInstanceName" {
 }
 
 variable "mapPublicIpOnLaunch" {
-  type = bool
+  type    = bool
+  default = true
 }
 
 variable "isPeeringAutoAccept" {
-  type = bool
+  type    = bool
+  default = true
+}
+
+variable "ingressPorts" {
+  type    = list(number)
+  default = [ 22,80 ]
 }

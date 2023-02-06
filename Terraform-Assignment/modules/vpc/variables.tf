@@ -33,3 +33,7 @@ variable "region" {
 variable "mapPublicIpOnLaunch" {
   type = bool
 }
+
+variable "ingressPorts" {
+  type = list(number)
+}
