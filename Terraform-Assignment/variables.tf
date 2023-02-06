@@ -53,3 +53,11 @@ variable "requesterInstanceName" {
 variable "accepterInstanceName" {
   type = string
 }
+
+variable "mapPublicIpOnLaunch" {
+  type = bool
+}
+
+variable "isPeeringAutoAccept" {
+  type = bool
+}

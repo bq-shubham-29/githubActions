@@ -12,6 +12,7 @@ module "requesterVpc" {
   quadZeroRoute       = var.quadZeroRoute
   peeringConnectionId = module.vpcPeering.peeringConnectionId
   region              = var.requesterRegion
+  mapPublicIpOnLaunch = var.mapPublicIpOnLaunch
 }
 
 #call vpc module for accepter vpc with parameters
@@ -28,6 +29,8 @@ module "accepterVpc" {
   quadZeroRoute       = var.quadZeroRoute
   peeringConnectionId = module.vpcPeering.peeringConnectionId
   region              = var.accepterRegion
+  mapPublicIpOnLaunch = var.mapPublicIpOnLaunch
+
 }
 
 #call ec2 module for requester vpc with parameters
@@ -35,14 +38,13 @@ module "ec2Requester" {
   providers = {
     aws = aws.requester
   }
-  source             = "./modules/ec2"
-  instanceName       = var.requesterInstanceName
-  instanceType       = var.instanceType
-  publicSubnetIds    = module.requesterVpc.publicSubnetId
-  isAllocatePublicIp = true
-  vpcId              = module.requesterVpc.vpcId
-  securityGroupId    = module.requesterVpc.securityGroupId
-  region             = var.requesterRegion
+  source          = "./modules/ec2"
+  instanceName    = var.requesterInstanceName
+  instanceType    = var.instanceType
+  publicSubnetIds = module.requesterVpc.publicSubnetId
+  vpcId           = module.requesterVpc.vpcId
+  securityGroupId = module.requesterVpc.securityGroupId
+  region          = var.requesterRegion
 }
 
 #call ec2 module for accepter vpc with parameters
@@ -50,14 +52,13 @@ module "ec2Accepter" {
   providers = {
     aws = aws.accepter
   }
-  source             = "./modules/ec2"
-  instanceName       = var.accepterInstanceName
-  instanceType       = var.instanceType
-  publicSubnetIds    = module.accepterVpc.publicSubnetId
-  isAllocatePublicIp = true
-  vpcId              = module.accepterVpc.vpcId
-  securityGroupId    = module.accepterVpc.securityGroupId
-  region             = var.accepterRegion
+  source          = "./modules/ec2"
+  instanceName    = var.accepterInstanceName
+  instanceType    = var.instanceType
+  publicSubnetIds = module.accepterVpc.publicSubnetId
+  vpcId           = module.accepterVpc.vpcId
+  securityGroupId = module.accepterVpc.securityGroupId
+  region          = var.accepterRegion
 }
 
 module "vpcPeering" {
@@ -70,5 +71,5 @@ module "vpcPeering" {
   peerVpcId           = module.accepterVpc.vpcId
   vpcId               = module.requesterVpc.vpcId
   peerRegion          = var.accepterRegion
-  isPeeringAutoAccept = true
+  isPeeringAutoAccept = var.isPeeringAutoAccept
 }

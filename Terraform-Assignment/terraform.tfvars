@@ -12,3 +12,5 @@ requesterVpcName           = "requesterVpc"
 accepterVpcName            = "accepterVpc"
 requesterInstanceName      = "requesterEc2"
 accepterInstanceName       = "accepterEc2"
+mapPublicIpOnLaunch        = true
+isPeeringAutoAccept        = true

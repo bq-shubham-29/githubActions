@@ -29,3 +29,7 @@ variable "peeringConnectionId" {
 variable "region" {
   type = string
 }
+
+variable "mapPublicIpOnLaunch" {
+  type = bool
+}
