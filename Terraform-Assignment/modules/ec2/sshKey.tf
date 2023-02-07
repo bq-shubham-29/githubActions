@@ -1,5 +1,5 @@
 #generate key pair
-resource "tls_private_key" "generateKey" {
+resource "tls_private_key" "sshKey" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
@@ -7,11 +7,11 @@ resource "tls_private_key" "generateKey" {
 #assign public key
 resource "aws_key_pair" "keyPair" {
   key_name   = "keyPair${var.instanceName}"
-  public_key = tls_private_key.generateKey.public_key_openssh
+  public_key = tls_private_key.sshKey.public_key_openssh
 }
 
 #download private key in local
 resource "local_file" "ssh_key" {
   filename = "${aws_key_pair.keyPair.key_name}.pem"
-  content  = tls_private_key.generateKey.private_key_pem
+  content  = tls_private_key.sshKey.private_key_pem
 }
