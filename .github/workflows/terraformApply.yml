@@ -21,32 +21,29 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: path
-        run: cd Terraform-Assignment
+      # - name: Terraform Init
+      #   id: init
+      #   run: |
+      #         cd Terraform-Assignment
+      #         terraform init
 
-      - name: Terraform Init
-        id: init
-        run: |
-              cd Terraform-Assignment
-              terraform init
+      # - name: Terraform Plan
+      #   id: plan
+      #   if: github.event_name == 'push'
+      #   run: |
+      #        cd Terraform-Assignment
+      #        terraform plan -no-color
+      #   continue-on-error: true
 
-      - name: Terraform Plan
-        id: plan
-        if: github.event_name == 'push'
-        run: |
-             cd Terraform-Assignment
-             terraform plan -no-color
-        continue-on-error: true
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1
 
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
-
-      - name: Terraform Apply
-        if: github.event_name == 'push'
-        run: |
-             cd Terraform-Assignment
-             terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   if: github.event_name == 'push'
+      #   run: |
+      #        cd Terraform-Assignment
+      #        terraform apply -auto-approve
 
       - name: Terraform Destroy
         id: destroy
