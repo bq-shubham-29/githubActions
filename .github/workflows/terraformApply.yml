@@ -23,10 +23,12 @@ jobs:
 
       - name: path
         run: cd Terraform-Assignment
-        
+
       - name: Terraform Init
         id: init
-        run: terraform init
+        run |
+          cd Terraform-Assignment
+          terraform init
 
       - name: Terraform Plan
         id: plan
