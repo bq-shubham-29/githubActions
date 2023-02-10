@@ -1,0 +1,15 @@
+name: ssh
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run a multi-line script
+        run: |
+             cd /home/ubuntu 
+             ssh -o StrictHostKeyChecking=no -i "key-pair.pem" ubuntu@ec2-43-205-199-34.ap-south-1.compute.amazonaws.com <<-END "touch remote1.txt" END
