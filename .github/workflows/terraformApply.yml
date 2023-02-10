@@ -44,8 +44,12 @@ jobs:
 
       - name: Terraform Apply
         if: github.event_name == 'push'
-        run: terraform apply -auto-approve
+        run: |
+             cd Terraform-Assignment
+             terraform apply -auto-approve
 
       - name: Terraform Destroy
         id: destroy
-        run: terraform destroy -auto-approve
+        run: |
+             cd Terraform-Assignment
+             terraform destroy -auto-approve
