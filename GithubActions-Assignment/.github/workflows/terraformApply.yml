@@ -3,7 +3,7 @@ name: "Terraform-apply-infra"
 on:
   push:
     branches:
-      - GithubActions-Assignment 
+      - temp
 
 jobs:
   terraform:
@@ -16,7 +16,7 @@ jobs:
     steps: 
       - name: path
         run: cd Terraform-Assignment
-        
+
       - name: Checkout
         uses: actions/checkout@v2
         
