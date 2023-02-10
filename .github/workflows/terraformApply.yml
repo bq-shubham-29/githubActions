@@ -33,7 +33,9 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'push'
-        run: terraform plan -no-color
+        run: |
+             cd Terraform-Assignment
+             terraform plan -no-color
         continue-on-error: true
 
       - name: Terraform Plan Status
