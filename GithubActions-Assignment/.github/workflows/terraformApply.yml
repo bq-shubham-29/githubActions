@@ -1,4 +1,4 @@
-name: "Terraform-apply-infra"
+name: "Terraform-apply-infrastructure"
 
 on:
   push:
