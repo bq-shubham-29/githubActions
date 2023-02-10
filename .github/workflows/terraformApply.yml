@@ -14,14 +14,15 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{secrets.SECRET_KEY}}
       AWS_REGION: 'ap-south-1'
     steps: 
-      - name: path
-        run: cd Terraform-Assignment
 
       - name: Checkout
         uses: actions/checkout@v2
         
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
+
+      - name: path
+        run: cd Terraform-Assignment
         
       - name: Terraform Init
         id: init
