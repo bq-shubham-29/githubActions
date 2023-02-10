@@ -26,9 +26,9 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run |
-          cd Terraform-Assignment
-          terraform init
+        run: |
+              cd Terraform-Assignment
+              terraform init
 
       - name: Terraform Plan
         id: plan
