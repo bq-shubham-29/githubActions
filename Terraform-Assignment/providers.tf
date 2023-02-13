@@ -1,8 +1,4 @@
 provider "aws" {
-  profile = "aws_credential"
-}
-
-provider "aws" {
   alias  = "requester"
   region = var.requesterRegion
 }
