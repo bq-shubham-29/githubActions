@@ -17,7 +17,7 @@ jobs:
         run: |
           aws autoscaling update-auto-scaling-group \
                             --auto-scaling-group-name my-ASG \
-                            --min-size ${{inputs.count.default}} \
+                            --min-size ${{inputs.count}} \
                             --max-size 5
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
