@@ -5,7 +5,7 @@ on:
     inputs:
       count:
         type: number
-        default: ${{env.defaultAutoscalingCount}}
+        default: ${{vars.DEFAULTAUTOSCALINGCOUNT}}
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
         
       - name: run  
         run: |
-           echo ${{vars.defaultAutoscalingCount}}
+           echo ${{variable.defaultAutoscalingCount}}
         
       - name: Run command for autoscaling count
         run: |
