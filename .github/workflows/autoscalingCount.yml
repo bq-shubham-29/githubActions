@@ -1,11 +1,14 @@
 name: count
 
 on:
-  workflow_dispatch:
-    inputs:
-      count:
-        type: number
-        default: 2
+  push: 
+    branches:
+      - main
+      
+inputs:
+  count:
+    type: number
+      default: 2
 
 jobs:
   build:
@@ -17,10 +20,10 @@ jobs:
         run: |
           aws autoscaling update-auto-scaling-group \
                             --auto-scaling-group-name my-ASG \
-                            --min-size ${{inputs.count}} \
+                            --min-size ${{inputs.count.default}} \
                             --max-size 5
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
-          AWS_DEFAULT_REGION: 'ap-south-1'
+          AWS_DEFAULT_REGION: ${{ secrets.REGION}}
           
