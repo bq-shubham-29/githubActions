@@ -16,7 +16,7 @@ jobs:
         
       - name: run  
         run: |
-           echo"${{vars.defaultAutoscalingCount}}"
+           echo ${{vars.defaultAutoscalingCount}}
         
       - name: Run command for autoscaling count
         run: |
