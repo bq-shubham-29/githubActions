@@ -1,7 +1,9 @@
 name: ssh
 
 on:
-  workflow_dispatch:
+  push: 
+    branches:
+      - GithubActions-Assignment
   
 jobs:
   build:
@@ -11,5 +13,5 @@ jobs:
       
       - name: Run a multi-line script
         run: |
-             cd /home/ubuntu 
-             ssh -o StrictHostKeyChecking=no -i "key-pair.pem" ubuntu@ec2-43-205-199-34.ap-south-1.compute.amazonaws.com <<-END "touch remote1.txt" END
+             cd /home/ubuntu/Downloads
+             ssh -o StrictHostKeyChecking=no -i "key-pair.pem" ec2-15-206-123-7.ap-south-1.compute.amazonaws.com <<-END "touch remotefile.txt" END
