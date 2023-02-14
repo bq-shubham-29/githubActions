@@ -1,9 +1,7 @@
 name: count
 
 on:
-  push: 
-    branches:
-      - main
+  workflow_dispatch:
     inputs:
       count:
         type: number
