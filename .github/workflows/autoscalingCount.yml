@@ -5,7 +5,7 @@ on:
     inputs:
       count:
         type: number
-        default: ${{vars.defaultAutoscalingCount}}
+        default: vars.defaultAutoscalingCount
 
 jobs:
   build:
