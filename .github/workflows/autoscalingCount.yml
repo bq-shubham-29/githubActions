@@ -4,11 +4,11 @@ on:
   push: 
     branches:
       - main
-      
+
 inputs:
   count:
     type: number
-      default: 2
+    default: 2
 
 jobs:
   build:
