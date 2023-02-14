@@ -1,4 +1,4 @@
-name: "Terraform-apply-infrastructure"
+name: "createTerraformInfrastructure"
 
 on:
   push:
@@ -7,34 +7,34 @@ on:
 
 jobs:
   terraform:
-    name: "Terraform"
+    name: "terraform"
     runs-on: self-hosted
     defaults:
       run:
         working-directory: GithubActions-Assignment
 
     steps:  
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
         
-      - name: Terraform Init
+      - name: terraform init
         id: init
         run: terraform init
 
-      - name: Terraform Plan
+      - name: terraform plan
         id: plan
         if: github.event_name == 'push'
         run: terraform plan -no-color
         continue-on-error: true
 
-      - name: Terraform Plan Status
+      - name: terraform plan status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Apply
+      - name: terraform apply
         if: github.event_name == 'push'
         run: terraform apply -auto-approve
 
-      - name: Terraform Destroy
+      - name: terraform destroy
         id: destroy
         run: terraform destroy -auto-approve

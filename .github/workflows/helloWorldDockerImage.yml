@@ -1,4 +1,4 @@
-name: docker-image
+name: helloWorldDockerImage
 
 on: 
   push:
@@ -13,9 +13,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: set up docker
+      - name: pull docker hello-world image
         run: docker pull hello-world
 
-      - name: pull docker image
+      - name: run docker hello-world image
         run: docker run hello-world
         

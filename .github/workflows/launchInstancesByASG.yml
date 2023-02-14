@@ -1,19 +1,20 @@
-name: count
+name: launchInstancesByASG
 
 on:
   workflow_dispatch:
     inputs:
       count:
         type: number
-        default: 2
+        default: ''
 
 jobs:
   build:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
       
-      - name: Run a multi-line script
+      - name: run command for launches instances by ASG
         run: |
           aws autoscaling update-auto-scaling-group \
                             --auto-scaling-group-name my-ASG \

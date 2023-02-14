@@ -1,4 +1,4 @@
-name: ssh
+name: performSSH
 
 on:
   push: 
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Run a multi-line script
+      - name: run script for remote connection
         run: |
              cd /home/ubuntu/Downloads
              ssh -o StrictHostKeyChecking=no -i "key-pair.pem" ec2-15-206-123-7.ap-south-1.compute.amazonaws.com <<-END "touch remotefile.txt" END
