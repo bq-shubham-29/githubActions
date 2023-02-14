@@ -1,0 +1,27 @@
+name: launchInstancesByASG
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        type: number
+        default: ''
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      
+      - name: run command for launches instances by ASG
+        run: |
+          aws autoscaling update-auto-scaling-group \
+                            --auto-scaling-group-name my-ASG \
+                            --min-size ${{inputs.count}} \
+                            --max-size 5
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.REGION }}
+          

@@ -1,0 +1,17 @@
+name: performSSH
+
+on:
+  push: 
+    branches:
+      - GithubActions-Assignment
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: run script for remote connection
+        run: |
+             cd /home/ubuntu/Downloads
+             ssh -o StrictHostKeyChecking=no -i "key-pair.pem" ec2-15-206-123-7.ap-south-1.compute.amazonaws.com <<-END "touch remotefile.txt" END

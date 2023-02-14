@@ -1,0 +1,21 @@
+name: helloWorldDockerImage
+
+on: 
+  push:
+    branches:
+      - GithubActions-Assignment
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: pull docker hello-world image
+        run: docker pull hello-world
+
+      - name: run docker hello-world image
+        run: docker run hello-world
+        
