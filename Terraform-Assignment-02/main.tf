@@ -1,0 +1,41 @@
+module "autoScaling" {
+  source                = "./modules/autoScaling"
+  minSize               = var.minSize
+  maxSize               = var.maxSize
+  desiredCapacity       = var.desiredCapacity
+  subnetIds             = var.subnetIds
+  instanceType          = var.instanceType
+  keyName               = var.keyName
+  githubActionsToken    = var.githubActionsToken
+  githubActionsUrl      = var.githubActionsUrl
+  targetGroupArn        = module.loadBalancer.targetGroupArn
+  scalingAdjustment     = var.scalingAdjustment
+  availabilityZone      = var.availabilityZone
+  cooldown              = var.cooldown
+  comparisonOperator    = var.comparisonOperator
+  evaluationPeriods     = var.evaluationPeriods
+  period                = var.period
+  threshold             = var.threshold
+  metricName            = var.metricName
+  cloudWatchStatistic   = var.cloudWatchStatistic
+  adjustmentType        = var.adjustmentType
+  cloudWatchNamespace   = var.cloudWatchNamespace
+  amiName               = var.amiName
+  amiRootDeviceType     = var.amiRootDeviceType
+  amiVirtualizationType = var.amiVirtualizationType
+}
+
+module "loadBalancer" {
+  source                   = "./modules/loadBalancer"
+  loadBalancerType         = var.loadBalancerType
+  securityGroups           = var.securityGroups
+  subnetIds                = var.subnetIds
+  targetType               = var.targetType
+  vpcId                    = var.vpcId
+  targetGroupPort          = var.targetGroupPort
+  targetGroupProtocol      = var.targetGroupProtocol
+  healthCheckPath          = var.healthCheckPath
+  healthyThreshold         = var.healthyThreshold
+  unhealthyThreshold       = var.unhealthyThreshold
+  loadBalancerListenerType = var.loadBalancerListenerType
+}
