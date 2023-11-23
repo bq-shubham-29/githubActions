@@ -6,7 +6,8 @@ on:
       name:
         description: "Who to greet"
         default: "World"
-
+permissions:
+  issues: write
 jobs:
     hello:
         runs-on: ubuntu-latest
