@@ -2,10 +2,6 @@ name: Manual approval
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: "Who to greet"
-        default: "World"
 permissions:
   issues: write
 jobs:
